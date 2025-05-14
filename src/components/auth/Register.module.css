@@ -1,0 +1,401 @@
+/* Register.module.css */
+.registerContainer {
+  background: linear-gradient(135deg, #c7f9cc 0%, #80ed99 50%, #57cc99 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  font-family: 'Inter', sans-serif;
+  perspective: 1000px;
+}
+
+.registerCard {
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s ease;
+  transform-style: preserve-3d;
+  animation: cardAppear 0.8s ease-out forwards;
+}
+
+.registerCard:hover {
+  transform: translateY(-5px) rotateX(2deg) rotateY(2deg);
+  box-shadow: 0 20px 40px rgba(50, 50, 93, 0.15), 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.decorCircle1 {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.3) 0%, rgba(16, 185, 129, 0.1) 70%);
+  animation: pulse 6s infinite alternate;
+}
+
+.decorCircle2 {
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 150, 105, 0.3) 0%, rgba(4, 120, 87, 0.1) 70%);
+  animation: pulse 8s infinite alternate-reverse;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+}
+
+.header {
+  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerPattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background-size: 100px 100px;
+  background-repeat: repeat;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.logoCircle {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  animation: logoPulse 2s infinite ease-in-out alternate;
+}
+
+@keyframes logoPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.brandName {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  position: relative;
+  z-index: 10;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tagline {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  font-weight: 500;
+  position: relative;
+  z-index: 10;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: 70vh;
+}
+
+.formTitle {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+}
+
+.errorMessage {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #fee2e2;
+  color: #b91c1c;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.inputRow {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .inputRow {
+    flex-direction: row;
+  }
+}
+
+.inputGroup {
+  flex: 1;
+}
+
+.inputLabel {
+  display: block;
+  color: #4b5563;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  background-color: white;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.inputError:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.passwordHint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.passwordError {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #ef4444;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  padding-right: 2.5rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  appearance: none;
+  outline: none;
+  transition: all 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+}
+
+.select:focus {
+  background-color: white;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.checkbox {
+  height: 1rem;
+  width: 1rem;
+  color: #10b981;
+  border-radius: 0.25rem;
+  margin-right: 0.5rem;
+  margin-top: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.termsText {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.termsLink {
+  color: #059669;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.termsLink:hover {
+  text-decoration: underline;
+}
+
+.submitButton {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #059669 0%, #10b981 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(16, 185, 129, 0.3);
+}
+
+.submitButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.4);
+}
+
+.submitButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.buttonSpinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.25rem 0;
+}
+
+.dividerLine {
+  flex-grow: 1;
+  height: 1px;
+  background-color: #e5e7eb;
+}
+
+.dividerText {
+  padding: 0 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.googleButton {
+  width: 100%;
+  padding: 0.625rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.googleButton:hover {
+  background-color: #f9fafb;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.googleButton:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(209, 213, 219, 0.5);
+}
+
+.googleButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.googleIcon {
+  margin-right: 0.75rem;
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
+.loginText {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.loginTextLink {
+  color: #059669;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.loginTextLink:hover {
+  text-decoration: underline;
+} 

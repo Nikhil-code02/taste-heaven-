@@ -1,0 +1,288 @@
+.profilePage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+  background-color: #f8f8f8;
+  min-height: calc(100vh - 80px);
+}
+
+.profileHeader {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/src/assets/profile-header.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: -2rem -1rem 2rem;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.profileCard {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatarContainer {
+  position: relative;
+  margin-right: 1.5rem;
+}
+
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.defaultAvatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: #d4342a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.editAvatar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #d4342a;
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+.userDetails h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  color: #222;
+}
+
+.userDetails p {
+  color: #666;
+  margin: 0.25rem 0;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.editButton {
+  display: flex;
+  align-items: center;
+  color: #d4342a;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+}
+
+.editButton svg {
+  margin-right: 0.5rem;
+}
+
+.infoRow {
+  margin-bottom: 1rem;
+}
+
+.infoLabel {
+  color: #777;
+  font-size: 0.875rem;
+}
+
+.infoValue {
+  font-weight: 500;
+  color: #333;
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.foodPreference {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.tabContainer {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e5e5;
+  min-width: max-content;
+}
+
+.tab {
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  color: #666;
+  font-weight: 500;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab.active {
+  color: #d4342a;
+}
+
+.tab.active:after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #d4342a;
+}
+
+.switchContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+}
+
+.switchLabel {
+  color: #555;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.emptyState p {
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+.actionButton {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: #d4342a;
+  border: 1px solid #d4342a;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.actionButton:hover {
+  background-color: #fff5f5;
+}
+
+.actionButton svg {
+  margin-right: 0.5rem;
+}
+
+.dangerButton {
+  color: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.dangerButton:hover {
+  background-color: #fff5f5;
+}
+
+.fullWidthButton {
+  width: 100%;
+}
+
+.mobileNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  padding: 0.75rem 0;
+  z-index: 10;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #777;
+  font-size: 0.75rem;
+}
+
+.navButton.active {
+  color: #d4342a;
+}
+
+.navButton svg {
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .profilePage {
+    padding: 3rem 2rem 5rem;
+  }
+
+  .profileHeader {
+    margin: -3rem -2rem 3rem;
+    padding: 4rem 2rem;
+  }
+
+  .avatar, .defaultAvatar {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .mobileNav {
+    max-width: 768px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 1rem 1rem 0 0;
+  }
+} 

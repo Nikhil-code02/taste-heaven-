@@ -1,25 +1,70 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import Layout from './layout/Layout';
+import Home from './pages/Home';
+import Login from './components/auth/Login';
+import Register from './components/auth/Register';
+import PrivateRoute from './components/auth/PrivateRoute';
+import Profile from './pages/Profile';
+import UserProfile from './pages/UserProfile';
+import Reservation from './pages/Reservation';
+import ReservationConfirmation from './pages/ReservationConfirmation';
+import Menu from './pages/Menu';
+import Contact from './pages/Contact';
 
 function App() {
+  console.log('App component rendered');
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AuthProvider>
+        <Layout>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/contact" element={<Contact />} />
+            
+            {/* Protected Routes */}
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <Profile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/user-profile/:userId?"
+              element={
+                <PrivateRoute>
+                  <UserProfile />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/reservation"
+              element={
+                <PrivateRoute>
+                  <Reservation />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/reservation-confirmation/:id"
+              element={
+                <PrivateRoute>
+                  <ReservationConfirmation />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </Layout>
+      </AuthProvider>
+    </Router>
   );
 }
 

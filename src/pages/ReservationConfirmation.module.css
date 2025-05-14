@@ -1,0 +1,206 @@
+.confirmationPage {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmationCard {
+  width: 100%;
+  max-width: 750px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.confirmationHeader {
+  background-color: #f1f8e9;
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.checkIcon {
+  color: #4caf50;
+  margin-bottom: 1rem;
+}
+
+.confirmationHeader h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.confirmationHeader p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.reservationDetails {
+  padding: 2rem;
+}
+
+.detailItem {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.detailIcon {
+  color: #e67e22;
+  margin-right: 1rem;
+}
+
+.detailLabel {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.detailValue {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.specialNote {
+  background-color: #fffde7;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.confirmationId {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+}
+
+.confirmationFooter {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+
+.confirmationNote, .contactInfo {
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.homeBtn, .viewBtn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.homeBtn {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.viewBtn {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+}
+
+.homeBtn:hover {
+  background-color: #eee;
+}
+
+.viewBtn:hover {
+  background-color: #d35400;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #e0e0e0;
+  border-top-color: #e67e22;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 3rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 2rem auto;
+}
+
+.errorContainer h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.returnBtn {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #e67e22;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.returnBtn:hover {
+  background-color: #d35400;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .actions {
+    flex-direction: column;
+  }
+  
+  .homeBtn, .viewBtn {
+    width: 100%;
+  }
+  
+  .confirmationHeader {
+    padding: 1.5rem;
+  }
+  
+  .reservationDetails, .confirmationFooter {
+    padding: 1.5rem;
+  }
+  
+  .detailItem {
+    align-items: flex-start;
+  }
+} 

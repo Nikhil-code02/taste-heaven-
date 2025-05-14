@@ -1,0 +1,123 @@
+.menuPage {
+  padding-bottom: 4rem;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.menuHeader {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/src/assets/menu-header.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 5rem 1rem;
+  margin-bottom: 3rem;
+}
+
+.menuHeader h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.menuHeader p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.menuDescription {
+  margin-bottom: 3rem;
+}
+
+.descriptionContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.descriptionContent h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.descriptionContent p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.menuContainer {
+  margin-bottom: 4rem;
+}
+
+.specialDiets {
+  background-color: #f8f8f8;
+  padding: 3rem 0;
+}
+
+.specialDiets h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.dietsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.dietCard {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.dietCard:hover {
+  transform: translateY(-5px);
+}
+
+.dietCard h3 {
+  color: #d4342a;
+  font-size: 1.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.dietCard p {
+  color: #666;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .menuHeader h1 {
+    font-size: 2.5rem;
+  }
+  
+  .descriptionContent h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menuHeader h1 {
+    font-size: 2rem;
+  }
+  
+  .menuHeader p {
+    font-size: 1rem;
+  }
+  
+  .dietCard {
+    padding: 1.2rem;
+  }
+} 

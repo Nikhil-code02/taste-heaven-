@@ -1,0 +1,115 @@
+.reservationPage {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.reservationContainer {
+  width: 100%;
+  max-width: 800px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.reservationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #e67e22;
+}
+
+.termsConditions {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.submitBtn {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submitBtn:hover {
+  background-color: #d35400;
+}
+
+.submitBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .reservationContainer {
+    padding: 1.5rem;
+  }
+} 
