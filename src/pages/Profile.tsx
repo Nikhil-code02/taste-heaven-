@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { authService, UserProfile } from '../services/authService';
-import { Settings, MapPin, User, Star, Clock, CreditCard, Edit, LogOut } from 'lucide-react';
+import { Settings, MapPin, User, Star, Clock, CreditCard, Edit, LogOut, Calendar } from 'lucide-react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import styles from './Profile.module.css';
+
+// Import the new components
+import Favorites from '../components/profile/Favorites';
+import Orders from '../components/profile/Orders';
+import Addresses from '../components/profile/Addresses';
+import Payment from '../components/profile/Payment';
+import Reservations from '../components/profile/Reservations';
 
 // Define interfaces for missing types
 interface Restaurant {
@@ -54,12 +61,17 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
   const [userData, setUserData] = useState<ExtendedUserProfile | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [foodPreferences, setFoodPreferences] = useState<string[]>([]);
   
   // Form fields for profile editing
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [displayName, setDisplayName] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [phoneNumber, setPhoneNumber] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [address, setAddress] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [bio, setBio] = useState('');
   
   // Check if user just registered (for showing completion prompt)
@@ -233,136 +245,19 @@ const Profile = () => {
         );
       
       case 'favorites':
-        return (
-          <div className={styles.profileCard}>
-            <h3 className={styles.sectionTitle}>Favorite Restaurants</h3>
-            {userData?.favoriteRestaurants && userData.favoriteRestaurants.length > 0 ? (
-              userData.favoriteRestaurants.map(restaurant => (
-                <div key={restaurant.id} className="bg-white p-4 rounded-lg shadow-sm mb-3 flex justify-between items-center">
-                  <div>
-                    <h4 className="font-medium">{restaurant.name}</h4>
-                    <p className="text-gray-600 text-sm">{restaurant.cuisine}</p>
-                  </div>
-                  <div className="flex items-center">
-                    <span className="mr-1 text-yellow-500">★</span>
-                    <span>{restaurant.rating}</span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className={styles.emptyState}>
-                <p>You haven't added any favorite restaurants yet.</p>
-                <button className={styles.actionButton}>
-                  Browse Restaurants
-                </button>
-              </div>
-            )}
-          </div>
-        );
+        return <Favorites />;
       
       case 'orders':
-        return (
-          <div className={styles.profileCard}>
-            <h3 className={styles.sectionTitle}>Recent Orders</h3>
-            {userData?.recentOrders && userData.recentOrders.length > 0 ? (
-              userData.recentOrders.map(order => (
-                <div key={order.id} className="bg-white p-4 rounded-lg shadow-sm mb-3">
-                  <div className="flex justify-between items-center mb-2">
-                    <h4 className="font-medium">{order.restaurant}</h4>
-                    <span className="text-green-500 text-sm">{order.status}</span>
-                  </div>
-                  <div className="flex justify-between text-gray-600 text-sm">
-                    <span>Order #{order.id}</span>
-                    <span>{order.date}</span>
-                  </div>
-                  <div className="mt-2 pt-2 border-t flex justify-between items-center">
-                    <span className="font-medium">${order.total.toFixed(2)}</span>
-                    <button className="text-green-500 text-sm">Reorder</button>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <div className={styles.emptyState}>
-                <p>You haven't placed any orders yet.</p>
-                <button className={styles.actionButton}>
-                  Browse Menu
-                </button>
-              </div>
-            )}
-          </div>
-        );
+        return <Orders />;
+      
+      case 'reservations':
+        return <Reservations />;
       
       case 'addresses':
-        return (
-          <div className={styles.profileCard}>
-            <div className={styles.sectionHeader}>
-              <h3 className={styles.sectionTitle}>Saved Addresses</h3>
-              <button 
-                onClick={() => navigate('/profile/edit')}
-                className={styles.editButton}
-              >
-                <Edit size={16} />
-                Add New
-              </button>
-            </div>
-            {userData?.savedAddresses && userData.savedAddresses.length > 0 ? (
-              userData.savedAddresses.map(address => (
-                <div key={address.id} className="bg-white p-4 rounded-lg shadow-sm mb-3">
-                  <div className="flex justify-between">
-                    <h4 className="font-medium">{address.label}</h4>
-                    <button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate('/profile/edit');
-                      }}
-                      className="text-red-500 text-sm"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                  <p className="text-gray-600 mt-1">{address.address}</p>
-                </div>
-              ))
-            ) : (
-              <div className={styles.emptyState}>
-                <p>You haven't added any addresses yet.</p>
-                <button 
-                  onClick={() => navigate('/profile/edit')}
-                  className={styles.actionButton}
-                >
-                  <Edit size={16} />
-                  Add Address
-                </button>
-              </div>
-            )}
-          </div>
-        );
+        return <Addresses />;
       
       case 'payment':
-        return (
-          <div className={styles.profileCard}>
-            <div className={styles.sectionHeader}>
-              <h3 className={styles.sectionTitle}>Payment Methods</h3>
-              <button 
-                onClick={() => navigate('/profile/edit')}
-                className={styles.editButton}
-              >
-                <Edit size={16} />
-                Add New
-              </button>
-            </div>
-            <div className={styles.emptyState}>
-              <p>No payment methods added yet.</p>
-              <button 
-                onClick={() => navigate('/profile/edit')}
-                className={styles.actionButton}
-              >
-                <CreditCard size={16} />
-                Add Payment Method
-              </button>
-            </div>
-          </div>
-        );
+        return <Payment />;
       
       case 'settings':
         return (
@@ -456,6 +351,12 @@ const Profile = () => {
             Orders
           </div>
           <div 
+            className={`${styles.tab} ${activeTab === 'reservations' ? styles.active : ''}`}
+            onClick={() => setActiveTab('reservations')}
+          >
+            Reservations
+          </div>
+          <div 
             className={`${styles.tab} ${activeTab === 'addresses' ? styles.active : ''}`}
             onClick={() => setActiveTab('addresses')}
           >
@@ -507,11 +408,27 @@ const Profile = () => {
         </button>
         
         <button 
+          onClick={() => setActiveTab('reservations')}
+          className={`${styles.navButton} ${activeTab === 'reservations' ? styles.active : ''}`}
+        >
+          <Calendar size={20} />
+          <span>Reservations</span>
+        </button>
+        
+        <button 
           onClick={() => setActiveTab('addresses')}
           className={`${styles.navButton} ${activeTab === 'addresses' ? styles.active : ''}`}
         >
           <MapPin size={20} />
           <span>Addresses</span>
+        </button>
+        
+        <button 
+          onClick={() => setActiveTab('payment')}
+          className={`${styles.navButton} ${activeTab === 'payment' ? styles.active : ''}`}
+        >
+          <CreditCard size={20} />
+          <span>Payment</span>
         </button>
         
         <button 

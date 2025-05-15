@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { useCart } from '../contexts/CartContext';
+import CartIcon from '../components/cart/CartIcon';
+import Cart from '../components/cart/Cart';
 import styles from './Header.module.css';
 import toast from 'react-hot-toast';
 
 const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const { pathname } = useLocation();
   const { currentUser, logout, loading } = useAuth();
+  const { cartItems } = useCart();
   const navigate = useNavigate();
   
   // Debug auth state
@@ -34,6 +40,19 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  // Add body scroll lock when cart is open
+  useEffect(() => {
+    if (cartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [cartOpen]);
+
   const handleLogout = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
@@ -53,77 +72,99 @@ const Header: React.FC = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const toggleCart = () => {
+    setCartOpen(!cartOpen);
+  };
+
   return (
-    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${mobileMenuOpen ? styles.open : ''}`}>
-      <div className={styles.container}>
-        <div className={styles.navContainer}>
-          <Link to="/" className={styles.logo}>Taste Haven</Link>
-          
-          {/* Mobile menu button */}
-          <div className={styles.mobileMenuBtn} onClick={toggleMobileMenu}>
-            <span></span>
-            <span></span>
-            <span></span>
+    <>
+      <header className={`${styles.header} ${scrolled ? styles.scrolled : ''} ${mobileMenuOpen ? styles.open : ''}`}>
+        <div className={styles.container}>
+          <div className={styles.navContainer}>
+            <Link to="/" className={styles.logo}>Taste Haven</Link>
+            
+            {/* Mobile menu button */}
+            <div className={styles.mobileMenuBtn} onClick={toggleMobileMenu}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <nav className={styles.navLinks}>
+              <Link to="/">Home</Link>
+              {!loading && (
+                <>
+                  {currentUser ? (
+                    <>
+                      <Link to="/reservation">Reservations</Link>
+                      <Link to="/menu">Menu</Link>
+                      <Link to="/profile">Profile</Link>
+                      <button 
+                        onClick={handleLogout}
+                        className={styles.navButton}
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/menu">Menu</Link>
+                      <Link to="/login">Login</Link>
+                    </>
+                  )}
+                </>
+              )}
+              <Link to="/contact">Contact</Link>
+              
+              {/* Cart Icon */}
+              <div className={styles.cartIconWrapper}>
+                <CartIcon onClick={toggleCart} />
+              </div>
+            </nav>
+            
+            {/* Mobile Navigation */}
+            <nav className={`${styles.mobileNav} ${mobileMenuOpen ? styles.open : ''}`}>
+              <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+              {!loading && (
+                <>
+                  {currentUser ? (
+                    <>
+                      <Link to="/reservation" onClick={() => setMobileMenuOpen(false)}>Reservations</Link>
+                      <Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
+                      <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>Profile</Link>
+                      <button 
+                        onClick={handleLogout}
+                        className={styles.navButton}
+                      >
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
+                      <Link to="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
+                    </>
+                  )}
+                </>
+              )}
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+              
+              {/* Mobile Cart Icon */}
+              <div className={styles.mobileCartIcon} onClick={() => { 
+                setMobileMenuOpen(false);
+                setCartOpen(true);
+              }}>
+                <CartIcon />
+              </div>
+            </nav>
           </div>
-          
-          {/* Desktop Navigation */}
-          <nav className={styles.navLinks}>
-            <Link to="/">Home</Link>
-            {!loading && (
-              <>
-                {currentUser ? (
-                  <>
-                    <Link to="/reservation">Reservations</Link>
-                    <Link to="/menu">Menu</Link>
-                    <Link to="/profile">Profile</Link>
-                    <button 
-                      onClick={handleLogout}
-                      className={styles.navButton}
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/menu">Menu</Link>
-                    <Link to="/login">Login</Link>
-                  </>
-                )}
-              </>
-            )}
-            <Link to="/contact">Contact</Link>
-          </nav>
-          
-          {/* Mobile Navigation */}
-          <nav className={`${styles.mobileNav} ${mobileMenuOpen ? styles.open : ''}`}>
-            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
-            {!loading && (
-              <>
-                {currentUser ? (
-                  <>
-                    <Link to="/reservation" onClick={() => setMobileMenuOpen(false)}>Reservations</Link>
-                    <Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
-                    <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>Profile</Link>
-                    <button 
-                      onClick={handleLogout}
-                      className={styles.navButton}
-                    >
-                      Logout
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Link to="/menu" onClick={() => setMobileMenuOpen(false)}>Menu</Link>
-                    <Link to="/login" onClick={() => setMobileMenuOpen(false)}>Login</Link>
-                  </>
-                )}
-              </>
-            )}
-            <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
-          </nav>
         </div>
-      </div>
-    </header>
+      </header>
+      
+      {/* Cart component */}
+      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+    </>
   );
 };
 

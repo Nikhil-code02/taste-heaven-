@@ -1,6 +1,5 @@
 import React from 'react';
 import MenuList from '../components/menu/MenuList';
-import { MenuProvider } from '../contexts/MenuContext';
 import styles from './Menu.module.css';
 
 const Menu: React.FC = () => {
@@ -30,9 +29,7 @@ const Menu: React.FC = () => {
       </div>
       
       <div className={styles.menuContainer}>
-        <MenuProvider>
-          <MenuList />
-        </MenuProvider>
+        <MenuList />
       </div>
       
       <div className={styles.specialDiets}>

@@ -1,0 +1,130 @@
+.menuList {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #d4342a;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  color: #d4342a;
+  background-color: #fff0f0;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.retryButton {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: #d4342a;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.retryButton:hover {
+  background-color: #b8291f;
+}
+
+.menuSections {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-bottom: 3rem;
+}
+
+.menuSection {
+  margin-bottom: 1rem;
+}
+
+.courseTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #d4342a;
+  display: inline-block;
+}
+
+.menuItemsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.noResults {
+  text-align: center;
+  padding: 3rem;
+  background-color: #f8f8f8;
+  border-radius: 0.75rem;
+  color: #555;
+}
+
+.noResults p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.clearFiltersButton {
+  padding: 0.75rem 1.5rem;
+  background-color: #d4342a;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clearFiltersButton:hover {
+  background-color: #b8291f;
+}
+
+@media (max-width: 768px) {
+  .menuItemsGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+  
+  .courseTitle {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menuItemsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .menuSection {
+    margin-bottom: 2rem;
+  }
+} 

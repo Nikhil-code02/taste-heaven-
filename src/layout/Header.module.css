@@ -174,6 +174,21 @@
   color: #e67e22;
 }
 
+.cartIconWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  position: relative;
+}
+
+.mobileCartIcon {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
 @media (max-width: 768px) {
   .navLinks {
     display: none;
@@ -185,6 +200,10 @@
   
   .mobileNav {
     display: flex;
+  }
+  
+  .cartIconWrapper {
+    display: none;
   }
   
   .mobileMenuBtn span:nth-child(1) {

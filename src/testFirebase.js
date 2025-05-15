@@ -1,10 +1,6 @@
 import { getAuth, signInAnonymously } from 'firebase/auth';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import app from './services/firebase';
-
-// Get Firebase services
-const auth = getAuth(app);
-const db = getFirestore(app);
+import { auth, db } from './services/firebase';
 
 // Test Firebase connection
 async function testFirebaseConnection() {

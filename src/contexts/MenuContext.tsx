@@ -1,27 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import { db } from '../services/firebase';
-
-interface MenuItem {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  availability: boolean;
-  preparationTime: number;
-  ingredients: string[];
-  allergens: string[];
-  specialLabels: string[];
-}
+import { MenuItem, Course, Cuisine } from '../services/menuService';
+import { menuItems as menuData } from '../data/menuData';
 
 interface MenuContextType {
   menuItems: MenuItem[];
   loading: boolean;
   error: string | null;
-  categories: string[];
-  getItemsByCategory: (category: string) => MenuItem[];
+  courses: Course[];
+  cuisines: Cuisine[];
+  getItemsByCourse: (course: Course) => MenuItem[];
+  getItemsByCategory: (category: Cuisine) => MenuItem[];
+  getSpecialItems: () => MenuItem[];
+  getVegetarianItems: () => MenuItem[];
+  getVeganItems: () => MenuItem[];
+  getGlutenFreeItems: () => MenuItem[];
   getItemById: (id: string) => MenuItem | undefined;
 }
 
@@ -36,24 +28,38 @@ export const useMenu = () => {
 };
 
 export const MenuProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [cuisines, setCuisines] = useState<Cuisine[]>([]);
 
   useEffect(() => {
     const fetchMenuItems = async () => {
       try {
-        const menuRef = collection(db, 'menu');
-        const snapshot = await getDocs(menuRef);
-        const items = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as MenuItem[];
-        setMenuItems(items);
+        setLoading(true);
+        
+        // In a production app, you would fetch from Firebase 
+        // For now, we'll use our local data
+        const fetchedItems = menuData;
+        
+        // Extract available courses and cuisines
+        const courseSet = new Set<string>();
+        const cuisineSet = new Set<string>();
+        
+        fetchedItems.forEach(item => {
+          if (item.course) courseSet.add(item.course);
+          if (item.category) cuisineSet.add(item.category);
+        });
+        
+        setItems(fetchedItems);
+        setCourses(Array.from(courseSet) as Course[]);
+        setCuisines(Array.from(cuisineSet) as Cuisine[]);
+        
+        setLoading(false);
       } catch (err) {
-        setError('Failed to fetch menu items');
-        console.error(err);
-      } finally {
+        console.error('Error fetching menu items:', err);
+        setError('Failed to load menu. Please try again later.');
         setLoading(false);
       }
     };
@@ -61,22 +67,49 @@ export const MenuProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchMenuItems();
   }, []);
 
-  const categories = Array.from(new Set(menuItems.map(item => item.category)));
+  const getItemsByCourse = (course: Course) => {
+    return items.filter(item => item.course === course);
+  };
 
-  const getItemsByCategory = (category: string) => {
-    return menuItems.filter(item => item.category === category);
+  const getItemsByCategory = (category: Cuisine) => {
+    return items.filter(item => item.category === category);
+  };
+
+  const getSpecialItems = () => {
+    return items.filter(item => 
+      item.course === 'Platter' || 
+      (item.specialLabels && item.specialLabels.includes('Chef\'s Special'))
+    );
+  };
+
+  const getVegetarianItems = () => {
+    return items.filter(item => item.isVegetarian);
+  };
+
+  const getVeganItems = () => {
+    return items.filter(item => item.isVegan);
+  };
+
+  const getGlutenFreeItems = () => {
+    return items.filter(item => item.isGlutenFree);
   };
 
   const getItemById = (id: string) => {
-    return menuItems.find(item => item.id === id);
+    return items.find(item => item.id === id);
   };
 
   const value = {
-    menuItems,
+    menuItems: items,
     loading,
     error,
-    categories,
+    courses,
+    cuisines,
+    getItemsByCourse,
     getItemsByCategory,
+    getSpecialItems,
+    getVegetarianItems,
+    getVeganItems,
+    getGlutenFreeItems,
     getItemById
   };
 
