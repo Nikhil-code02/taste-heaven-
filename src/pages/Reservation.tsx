@@ -88,8 +88,12 @@ const Reservation: React.FC = () => {
     setLoading(true);
     
     try {
+      console.log('Submitting reservation data...');
+      
       // Check availability first
       const selectedDate = new Date(date);
+      console.log('Checking availability for:', { date: selectedDate, time });
+      
       const isAvailable = await reservationService.checkAvailability(selectedDate, time);
       
       if (!isAvailable) {
@@ -107,17 +111,22 @@ const Reservation: React.FC = () => {
         date: selectedDate,
         time,
         guests,
-        occasion: occasion === 'None' ? undefined : occasion,
-        specialRequests: specialRequests.trim() || undefined
+        occasion: occasion !== 'None' ? occasion : null,
+        specialRequests: specialRequests.trim() || null
       };
+      
+      console.log('Creating reservation with data:', reservationData);
       
       const reservationId = await reservationService.createReservation(reservationData);
       
+      console.log('Reservation created successfully with ID:', reservationId);
       toast.success('Reservation created successfully!');
       navigate(`/reservation-confirmation/${reservationId}`);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error creating reservation:', error);
-      toast.error('Failed to create reservation. Please try again.');
+      // Show more specific error message if available
+      const errorMessage = error.message || 'Failed to create reservation. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

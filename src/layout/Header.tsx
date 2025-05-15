@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useCart } from '../contexts/CartContext';
 import CartIcon from '../components/cart/CartIcon';
@@ -11,9 +11,9 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const { pathname } = useLocation();
   const { currentUser, logout, loading } = useAuth();
-  const { cartItems } = useCart();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { getItemCount } = useCart();
   const navigate = useNavigate();
   
   // Debug auth state

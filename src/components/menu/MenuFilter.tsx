@@ -33,21 +33,8 @@ const MenuFilter: React.FC<MenuFilterProps> = ({
   onSearchChange,
   onDietaryFilterChange
 }) => {
-  const [isMobileView, setIsMobileView] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [activeFiltersCount, setActiveFiltersCount] = useState(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth < 768);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     let count = 0;

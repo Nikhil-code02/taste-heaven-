@@ -20,7 +20,18 @@ const Reservations: React.FC = () => {
       try {
         setLoading(true);
         const data = await reservationService.getUserReservations(currentUser.uid);
-        setReservations(data);
+        
+        // Sort reservations by date (newest first)
+        const sortedReservations = data.sort((a, b) => {
+          // First compare by date
+          const dateComparison = b.date.getTime() - a.date.getTime();
+          if (dateComparison !== 0) return dateComparison;
+          
+          // If dates are the same, compare by time
+          return b.time.localeCompare(a.time);
+        });
+        
+        setReservations(sortedReservations);
       } catch (err) {
         console.error('Error fetching reservations:', err);
         setError('Failed to load your reservations');

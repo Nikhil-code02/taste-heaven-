@@ -48,6 +48,13 @@ service cloud.firestore {
       allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
     }
     
+    // Rules for reservations collection
+    match /reservations/{docId} {
+      allow read: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
+    }
+    
     // Fallback rule - deny by default
     match /{document=**} {
       allow read, write: if false;
