@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Home.module.css';
+import homeImage from './home.jpeg';
 
 const Home: React.FC = () => {
   // Add state to track login status
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
       <section id="home" className={styles.hero}>
         <div className={styles.heroBgOverlay}></div>
         <img 
-          src="/home.jpeg"
+          src={homeImage}
           alt="Restaurant Interior" 
           className={styles.heroImage}
         />
