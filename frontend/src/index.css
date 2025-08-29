@@ -1,13 +1,12 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional styles for blank profile image placeholder */
+.blank-profile-placeholder {
+  @apply w-32 h-32 rounded-full shadow-lg border-4 border-blue-400/50 bg-gray-300 dark:bg-gray-600 flex items-center justify-center;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.blank-profile-placeholder svg {
+  @apply w-16 h-16 text-gray-500 dark:text-gray-400;
 }
